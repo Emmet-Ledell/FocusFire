@@ -2,10 +2,7 @@ from pynput import keyboard
 import sqlite3
 import atexit
 import threading
-
-
-
-
+# Don't think I need to thread lock this since there's just one thread sharing the connection, and sqllite auto locks the connections
 
 def on_press(key):
     try:
@@ -26,7 +23,7 @@ def on_release(key):
 
 
 # Blocking
-# Collect events until released
+# Collect events until released, wrapped in a try finally to close the db connection so nothing spins out and keeps it locked
 try:
     connection = sqlite3.connect('db/focuswatch.db', check_same_thread=False)
     cursor = connection.cursor()
@@ -40,15 +37,16 @@ finally:
     connection.close()
 
 
-# def onClose():
-#     print("closing")
-#     connection.commit()
-#     connection.close()
-
-# atexit.register(onClose)
 
 
 # ...or, in a non-blocking fashion:
 # listener = keyboard.Listener(
 #     on_press=on_press,
 #     on_release=on_release)
+
+# def onClose():
+#     print("closing")
+#     connection.commit()
+#     connection.close()
+
+# atexit.register(onClose)
