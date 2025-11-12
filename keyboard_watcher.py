@@ -38,7 +38,8 @@ finally:
 
 
 
-
+# To use this I would have to call it and then have something else block, as this will just keep going through the file and close if 
+# nothing blocks it
 # ...or, in a non-blocking fashion:
 # listener = keyboard.Listener(
 #     on_press=on_press,

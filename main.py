@@ -16,6 +16,7 @@ from pynput import mouse, keyboard
 # def search(body: dict):
 #     print("a")
 
+#This is in a different file and how to call said post or whatever, just after the 8000 with /
 # #  const res = await fetch("http://127.0.0.1:8000/search", {
 # #         method: "POST",
 # #         headers: { "Content-Type": "application/json" },
