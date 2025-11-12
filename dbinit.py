@@ -10,15 +10,16 @@ CREATE TABLE IF NOT EXISTS mouse_log (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     x_pos TEXT,
     y_pos TEXT,
-    timestamp TEXT DEFAULT CURRENT_TIMESTAMP
+    timestamp TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now'))
 );
 """)
+
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS key_log (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     release BOOLEAN,
     key TEXT,
-    timestamp TEXT DEFAULT CURRENT_TIMESTAMP
+    timestamp TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now'))
 );
 """)
 
