@@ -5,6 +5,7 @@ import sqlite3
 def on_move(x, y):
     print('Pointer moved to {0}'.format(
         (x, y)))
+    cursor.execute('insert into mouse_log (x_pos, y_pos) VALUES (?, ?)', (str(x), str(y)))
     if (x == 0.0 and y == 0.0):
         return False
 
@@ -22,15 +23,24 @@ def on_scroll(x, y, dx, dy):
         (x, y)))
 
 # Collect events until released
-with mouse.Listener(
-        on_move=on_move,
-        on_click=on_click,
-        on_scroll=on_scroll) as listener:
-    listener.join()
+try: 
+    connection = sqlite3.connect('db/focuswatch.db', check_same_thread=False)
+    cursor = connection.cursor()
+    with mouse.Listener(
+            on_move=on_move,
+            on_click=on_click,
+            on_scroll=on_scroll) as listener:
+        listener.join()
+finally:
+    print("closing")
+    connection.commit()
+    connection.close()
+
+
 
 # ...or, in a non-blocking fashion:
-listener = mouse.Listener(
-    on_move=on_move,
-    on_click=on_click,
-    on_scroll=on_scroll)
-listener.start()
+# listener = mouse.Listener(
+#     on_move=on_move,
+#     on_click=on_click,
+#     on_scroll=on_scroll)
+# listener.start()
