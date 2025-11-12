@@ -1,4 +1,6 @@
 from pynput import mouse
+import sqlite3
+
 
 def on_move(x, y):
     print('Pointer moved to {0}'.format(

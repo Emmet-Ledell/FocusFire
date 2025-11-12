@@ -1,4 +1,9 @@
 from pynput import keyboard
+import sqlite3
+
+connection = sqlite3.connect('db/focuswatch.db')
+
+cursor = connection.cursor()
 
 def on_press(key):
     try:
