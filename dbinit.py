@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS mouse_log (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     x_pos TEXT,
     y_pos TEXT,
+    click BOOLEAN DEFAULT FALSE,
     timestamp TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now'))
 );
 """)
