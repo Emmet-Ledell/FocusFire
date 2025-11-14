@@ -24,7 +24,8 @@ def on_scroll(x, y, dx, dy):
 
 # Collect events until released
 try: 
-    connection = sqlite3.connect('db/focuswatch.db', check_same_thread=False)
+    connection = sqlite3.connect('db/focuswatch.db', check_same_thread=False, isolation_level=None)
+    connection.execute("PRAGMA journal_mode=WAL;")
     cursor = connection.cursor()
     with mouse.Listener(
             on_move=on_move,
@@ -35,7 +36,6 @@ finally:
     print("closing")
     connection.commit()
     connection.close()
-
 
 
 # ...or, in a non-blocking fashion:

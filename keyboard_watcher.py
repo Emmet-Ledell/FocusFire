@@ -25,7 +25,8 @@ def on_release(key):
 # Blocking
 # Collect events until released, wrapped in a try finally to close the db connection so nothing spins out and keeps it locked
 try:
-    connection = sqlite3.connect('db/focuswatch.db', check_same_thread=False)
+    connection = sqlite3.connect('db/focuswatch.db', check_same_thread=False, isolation_level=None)
+    connection.execute("PRAGMA journal_mode=WAL;")
     cursor = connection.cursor()
     with keyboard.Listener(
             on_press=on_press,

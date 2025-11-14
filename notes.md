@@ -14,3 +14,6 @@ timestamp
 
 If something is locking th db and I can't find it do fuser *file* to find the process locking it
 run kill -9 *process number* to kll it
+
+
+Have a built in pomodoro work/relax cycle mode
